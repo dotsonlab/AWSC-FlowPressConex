@@ -60,9 +60,13 @@ while True:
     try:
         #read analog pin #
         reading1 = ADC.read(psensor_pin1)
+	time.sleep(0.1)
         reading2 = ADC.read(psensor_pin2)
+	time.sleep(0.1)
         reading3 = ADC.read(psensor_pin3)
+	time.sleep(0.1)
         reading4 = ADC.read(psensor_pin4)
+	time.sleep(0.1)
         reading5 = ADC.read(psensor_pin5)
 
         # increment counter for average calculation
