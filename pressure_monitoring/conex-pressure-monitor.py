@@ -151,7 +151,7 @@ while True:
                 #add first column date/time stamp
                 file.write(pt)
                 #add next columns with raw reading, and converted voltage
-                file.write(",%f,%f,%f,%f,%f\n" % (,AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
+                file.write(",%f,%f,%f,%f,%f\n" % (AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
                 #add first column date/time stamp
                 file.close()
                 #if MM/DD/YR changes, update filename
