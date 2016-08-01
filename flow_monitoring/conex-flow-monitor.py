@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import Adafruit_BBIO.GPIO as GPIO
 import time, sys
+import os.path
 
 GPIO.setup("P9_12", GPIO.IN)
 GPIO.setup("P9_15", GPIO.IN)
@@ -12,12 +13,7 @@ currentday=now.tm_mday
 currentyear=now.tm_year
 filename = "{0}_{1}_{2}_conex-flow.csv".format(currentyear, currentmonth, currentday)
 
-#### informative messaging for starting storage file
-print "Opening ",filename, " for appending..."
-print "reading analog inputs and storing data..."
-file=open(filename,"a")
-file.write("Time,Meter,Counts,Flow\n")
-file.close()
+restart = True
 
 #initialize averaging counter
 AVE_count1=0
@@ -28,6 +24,9 @@ AVE_flow2=0
 
 AVE_count3=0
 AVE_flow3=0
+
+flow3total = 0
+lastflow3total = 0
 
 count=0
 
@@ -64,6 +63,31 @@ while True:
         currentday=now.tm_mday
         currentyear=now.tm_year
 
+        if (os.path.isfile(filename) and restart):
+            #restart ensures that it will only execute this once.
+            restart = False
+            #restarting the file
+            file = open(filename)
+            #grab last non-blank line
+            last = None
+            for line in (line for line in file if line.rstrip('\n')):
+                last = line
+            #set totalflow to last known value
+            totalflow = float(last.split(",")[4])
+        elif not (os.path.isfile(filename)):
+            #Initial and daily startup
+            flow3total = 0
+            lastflow3total = 0
+            file=open(filename,"a")
+            #informative messaging for starting storage file
+            print "Opening ",filename, " for appending..."
+            print "reading analog inputs and storing data..."
+            file.write("Time,flow1,flow2,flow3,flow3total\n")
+            #add first column date/time stamp
+            file.write(pt)
+            file.write(",%f,%f,%f,%f\n" % (AVE_flow1,AVE_flow2,AVE_flow3,flow3total))
+            file.close()
+
         start_counter = 1
         count1=0
         count2=0
@@ -77,6 +101,8 @@ while True:
         count1=0
         count2=0
         count3=0
+        flow3total = flow3*(5/60) + lastflow3total
+        lastflow3total = flow3total
         count = count+1
 
         if (now.tm_sec >= 0)&(now.tm_sec <= 15)&(count>=10): #if new minute, write data to file
@@ -98,14 +124,8 @@ while True:
             #add first column date/time stamp
             file.write(pt)
             #add next columns with raw reading, and converted voltage
-            file.write(",%s,%f,%f\n" % ("1",AVE_count1,AVE_flow1))
-            #add first column date/time stamp
-            file.write(pt)
-            file.write(",%s,%f,%f\n" % ("2",AVE_count2,AVE_flow2))
-            #add first column date/time stamp
-            file.write(pt)
-            file.write(",%s,%f,%f\n" % ("3",AVE_count3,AVE_flow3))
-
+            file.write(",%f,%f,%f,%f\n" % (AVE_flow1,AVE_flow2,AVE_flow3,flow3total))
+            file.close
             #if MM/DD/YR changes, update filename
             #this translates to a new file every day
             ##!!!!header row is dropped from subsequent days
