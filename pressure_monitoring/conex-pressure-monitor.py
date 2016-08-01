@@ -1,5 +1,6 @@
 import Adafruit_BBIO.ADC as ADC
 import time, sys
+import os.path
 
 ####setup ADC and assign input pin
 ADC.setup()
@@ -24,12 +25,7 @@ currentday=now.tm_mday
 currentyear=now.tm_year
 filename = "{0}_{1}_{2}_conex-pressure.csv".format(currentyear, currentmonth, currentday)
 
-#### informative messaging for starting storage file
-print "Opening ",filename, " for appending..."
-print "reading analog inputs and storing data..."
-file=open(filename,"a")
-file.write("Time,Reading,Volts,Pressure\n")
-file.close()
+restart = True
 
 #initialize averaging counter
 AVE_reading1=0
@@ -60,14 +56,15 @@ while True:
     try:
         #read analog pin #
         reading1 = ADC.read(psensor_pin1)
-	time.sleep(0.1)
+        time.sleep(0.1)
         reading2 = ADC.read(psensor_pin2)
-	time.sleep(0.1)
+        time.sleep(0.1)
         reading3 = ADC.read(psensor_pin3)
-	time.sleep(0.1)
+        time.sleep(0.1)
         reading4 = ADC.read(psensor_pin4)
-	time.sleep(0.1)
+        time.sleep(0.1)
         reading5 = ADC.read(psensor_pin5)
+        time.sleep(0.1)
 
         # increment counter for average calculation
         count = count+1
@@ -78,6 +75,24 @@ while True:
         currentmonth=now.tm_mon
         currentday=now.tm_mday
         currentyear=now.tm_year
+
+
+        if (os.path.isfile(filename) and restart):
+            #restart ensures that it will only execute this once.
+            restart = False
+            #restarting the file
+            file = open(filename)
+
+        elif not (os.path.isfile(filename)):
+            file=open(filename,"a")
+            #informative messaging for starting storage file
+            print "Opening ",filename, " for appending..."
+            print "reading analog inputs and storing data..."
+            file.write("Time,P1,P2,P3,P4,P5\n")
+            #add first column date/time stamp
+            file.write(pt)
+            file.write(",%f,%f,%f,%f,%f\n" % (AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
+            file.close()
 
         #scale reading back to voltage
         volts1=reading1*1.800
@@ -136,19 +151,8 @@ while True:
                 #add first column date/time stamp
                 file.write(pt)
                 #add next columns with raw reading, and converted voltage
-                file.write(",%s,%f,%f,%f\n" % ("1",AVE_reading1,AVE_volts1,AVE_pressure1))
+                file.write(",%f,%f,%f,%f,%f\n" % (,AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
                 #add first column date/time stamp
-                file.write(pt)
-                file.write(",%s,%f,%f,%f\n" % ("2",AVE_reading2,AVE_volts2,AVE_pressure2))
-                #add first column date/time stamp
-                file.write(pt)
-                file.write(",%s,%f,%f,%f\n" % ("3",AVE_reading3,AVE_volts3,AVE_pressure3))
-                #add first column date/time stamp
-                file.write(pt)
-                file.write(",%s,%f,%f,%f\n" % ("4",AVE_reading4,AVE_volts4,AVE_pressure4))
-                #add first column date/time stamp
-                file.write(pt)
-                file.write(",%s,%f,%f,%f\n" % ("5",AVE_reading5,AVE_volts5,AVE_pressure5))
                 file.close()
                 #if MM/DD/YR changes, update filename
                 #this translates to a new file every day
