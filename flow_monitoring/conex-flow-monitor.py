@@ -110,7 +110,7 @@ while True:
         flow2 = ((count2*12)/588.52)
         flow3 = ((count3*12)/2200/3.78)
         flow4 = ((count4*12)/2200/3.78)
-        print '\t%s\t%f\t%s\t%f\t%s\t%f\t%s%i' % ( "1: ",flow1,"2: ",flow2,"3: ",flow3,"4: ",flow4,"count: "count)
+        print '\t%s\t%f\t%s\t%f\t%s\t%f\t%s%i' % ( "1: ",flow1,"2: ",flow2,"3: ",flow3,"4: ",flow4,"count: ",count)
         count1=0
         count2=0
         count3=0
