@@ -58,7 +58,7 @@ def countPulse3(channel):
 
 def countPulse4(channel):
   global count4
-  count3 = count4+1
+  count4 = count4+1
 
 GPIO.add_event_detect("P9_12", GPIO.RISING, callback=countPulse1)
 GPIO.add_event_detect("P9_15", GPIO.RISING, callback=countPulse2)
