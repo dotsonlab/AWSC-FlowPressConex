@@ -6,7 +6,7 @@ import os.path
 GPIO.setup("P9_12", GPIO.IN)
 GPIO.setup("P9_15", GPIO.IN)
 GPIO.setup("P9_23", GPIO.IN)  #greywater product
-GPIO.setup("P9_25", GPIO.IN)  #washwater product
+GPIO.setup("P9_27", GPIO.IN)  #washwater product
 
 now=time.localtime(time.time())
 currentmonth=now.tm_mon
@@ -63,7 +63,7 @@ def countPulse4(channel):
 GPIO.add_event_detect("P9_12", GPIO.RISING, callback=countPulse1)
 GPIO.add_event_detect("P9_15", GPIO.RISING, callback=countPulse2)
 GPIO.add_event_detect("P9_23", GPIO.RISING, callback=countPulse3)
-GPIO.add_event_detect("P9_25", GPIO.RISING, callback=countPulse4)
+GPIO.add_event_detect("P9_27", GPIO.RISING, callback=countPulse4)
 
 while True:
     try:
