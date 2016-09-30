@@ -104,11 +104,11 @@ while True:
         #scale 1.8V reading to pressure based on 4-20mA signal read
         #from shunt resistor with a 1.8V max at 20 mA corresponding to
         #200 psi and a 4mA min corresponding to 0 psi
-        pressure1 = volts1 * 140.45 - 49.16
-        pressure2 = volts2 * 140.45 - 49.16
-        pressure3 = volts3 * 140.45 - 49.16
-        pressure4 = volts4 * 140.45 - 49.16
-        pressure5 = volts5 * 140.45 - 49.16
+        pressure1 = volts1 * 347.22 - 125.00 #feed
+        pressure2 = volts2 * 347.22 - 125.00 #greywater reject
+        pressure3 = volts3 * 347.22 - 125.00 #inter reject
+        pressure4 = volts4 * 140.45 - 49.16 #wash product
+        pressure5 = volts5 * 140.45 - 49.16 #inter product
 
         #write to the screen #
         ###comment this out when not testing####
