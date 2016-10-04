@@ -110,7 +110,7 @@ while True:
         flow2 = ((count2*12.0)/588.52)
         flow3 = ((count3*12.0)/2200.0/3.78)
         flow4 = ((count4*12.0)/2200.0/3.78)
-        print '\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "GW-R: ",flow1,"GW-P: ",flow3,"I-P: ",flow2,"I-R: ",flow4)
+        print pt,'\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "GW-R: ",flow1,"GW-P: ",flow3,"I-P: ",flow2,"I-R: ",flow4)
         count1=0
         count2=0
         count3=0
