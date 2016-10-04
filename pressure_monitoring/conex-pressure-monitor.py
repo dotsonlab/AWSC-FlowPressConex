@@ -49,7 +49,7 @@ AVE_volts5=0
 AVE_pressure5=0
 
 count=0
-
+printcount=0
 
 #### Begin measurement loop
 while True:
@@ -68,6 +68,9 @@ while True:
 
         # increment counter for average calculation
         count = count+1
+
+	# increment printcounter
+	printcount = printcount+1
 
         #get current time
         now=time.localtime(time.time())
@@ -104,13 +107,17 @@ while True:
         #scale 1.8V reading to pressure based on 4-20mA signal read
         #from shunt resistor with a 1.8V max at 20 mA corresponding to
         #200 psi and a 4mA min corresponding to 0 psi
-        pressure1 = volts1 * 347.22 - 125.00 #feed
-        pressure2 = volts2 * 347.22 - 125.00 #greywater reject
-        pressure3 = volts3 * 347.22 - 125.00 #inter reject
-        pressure4 = volts4 * 140.45 - 49.16 #wash product
-        pressure5 = volts5 * 140.45 - 49.16 #inter product
-
-        #write to the screen #
+        pressure1 = volts1 * 347.22 - 125.00 + 3.65 #feed
+        pressure2 = volts2 * 347.22 - 125.00 + 4.55 #greywater reject
+        pressure3 = volts3 * 347.22 - 125.00 + 4.06 #inter reject
+        pressure4 = volts4 * 140.45 - 49.16 - 0.37 #wash product
+        pressure5 = volts5 * 140.45 - 49.16 + 1.16 #inter product
+        
+	if (printcount>5):
+            print pt,'\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "F: ",pressure1,"GW-R: ",pressure2,"I-P: ",pressure5,"I-R: ",pressure3,"W-P",pressure4)
+            printcount=0
+        
+	#write to the screen #
         ###comment this out when not testing####
         #print pt,'\t%s\t%f\t%f\t%f\t%i' % ( "1",reading1,volts1,pressure1,count)
         #print pt,'\t%s\t%f\t%f\t%f\t%i' % ( "2",reading2,volts2,pressure2,count)
