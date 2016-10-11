@@ -93,7 +93,7 @@ while True:
             #informative messaging for starting storage file
             print "Opening ",filename, " for appending..."
             print "reading analog inputs and storing data..."
-            file.write("Time,flow1,flow2,flow3,flow3total\n")
+            file.write("Time,GW-Reject,INT-Reject,INT-Product,WW-Product\n")
             #add first column date/time stamp
             file.write(pt)
             file.write(",%f,%f,%f,%f\n" % (AVE_flow1,AVE_flow2,AVE_flow3,AVE_flow4))
@@ -137,17 +137,18 @@ while True:
             AVE_flow4=(AVE_flow4+flow4)/count
             print pt,'AVE-\t%s\t%f\t%f' % ( "4",AVE_count4,AVE_flow4)
 
-            #open file to append
-            file=open(filename,"a")
-            #add first column date/time stamp
-            file.write(pt)
-            #add next columns with raw reading, and converted voltage
-            file.write(",%f,%f,%f,%f\n" % (AVE_flow1,AVE_flow2,AVE_flow3,AVE_flow4))
-            file.close
-            #if MM/DD/YR changes, update filename
-            #this translates to a new file every day
-            ##!!!!header row is dropped from subsequent days
-            filename = "{0}_{1}_{2}_conex-flow.csv".format(currentyear, currentmonth, currentday)
+            if (AVE_flow1+AVE_flow2+AVE_flow3+AVE_flow4 !=0):
+                #open file to append
+                file=open(filename,"a")
+                #add first column date/time stamp
+                file.write(pt)
+                #add next columns with raw reading, and converted voltage
+                file.write(",%f,%f,%f,%f\n" % (AVE_flow1,AVE_flow2,AVE_flow3,AVE_flow4))
+                file.close
+                #if MM/DD/YR changes, update filename
+                #this translates to a new file every day
+                ##!!!!header row is dropped from subsequent days
+                filename = "{0}_{1}_{2}_conex-flow.csv".format(currentyear, currentmonth, currentday)
 
             #reset averageing counters
             AVE_count1=0
