@@ -91,7 +91,7 @@ while True:
             #informative messaging for starting storage file
             print "Opening ",filename, " for appending..."
             print "reading analog inputs and storing data..."
-            file.write("Time,P1,P2,P3,P4,P5\n")
+            file.write("Time,Feed,GWReject,INTReject,WWProduct,INTProduct\n")
             #add first column date/time stamp
             file.write(pt)
             file.write(",%f,%f,%f,%f,%f\n" % (AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
@@ -153,17 +153,18 @@ while True:
                 print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "5",AVE_reading5,AVE_volts5,AVE_pressure5)
 
 
-                #open file to append
-                file=open(filename,"a")
-                #add first column date/time stamp
-                file.write(pt)
-                #add next columns with raw reading, and converted voltage
-                file.write(",%f,%f,%f,%f,%f\n" % (AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
-                #add first column date/time stamp
-                file.close()
-                #if MM/DD/YR changes, update filename
-                #this translates to a new file every day
-                filename = "{0}_{1}_{2}_conex-pressure.csv".format(currentyear, currentmonth, currentday)
+                if (AVE_pressure1<1)or(AVE_pressure2<1)or(AVE_pressure3<1)or(AVE_pressure4<1)or(AVE_pressure5<1):
+		    # open file to append
+                    file=open(filename,"a")
+                    # add first column date/time stamp
+                    file.write(pt)
+                    # add next columns with raw reading, and converted voltage
+                    file.write(",%f,%f,%f,%f,%f\n" % (AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
+                    # add first column date/time stamp
+                    file.close()
+                    # if MM/DD/YR changes, update filename
+                    #this translates to a new file every day
+                    filename = "{0}_{1}_{2}_conex-pressure.csv".format(currentyear, currentmonth, currentday)
 
                 #reset averageing counters
                 AVE_reading1=0
