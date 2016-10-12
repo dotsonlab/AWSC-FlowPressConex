@@ -104,7 +104,7 @@ while True:
         count2=0
         count3=0
         count4=0
-        time.sleep(5)
+        time.sleep(.5)
         start_counter = 0
         flow1 = ((count1*12.0)/588.52) #assumes test flow was 11.5 gpm as defined by manufacturer and reports in gpm
         flow2 = ((count2*12.0)/588.52)
