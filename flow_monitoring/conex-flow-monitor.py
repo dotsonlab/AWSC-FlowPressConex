@@ -104,7 +104,7 @@ while True:
         count2=0
         count3=0
         count4=0
-        time.sleep(.5)
+        time.sleep(.75)
         start_counter = 0
         flow1 = ((count1*12.0)/588.52) #assumes test flow was 11.5 gpm as defined by manufacturer and reports in gpm
         flow2 = ((count2*12.0)/588.52)
@@ -123,19 +123,19 @@ while True:
                                          # and write only one value for second $
             AVE_count1=(AVE_count1+count1)/count
             AVE_flow1=(AVE_flow1+flow1)/count
-            print pt,'AVE-\t%s\t%f\t%f' % ( "1",AVE_count1,AVE_flow1)
+            #print pt,'AVE-\t%s\t%f\t%f' % ( "1",AVE_count1,AVE_flow1)
 
             AVE_count2=(AVE_count2+count2)/count
             AVE_flow2=(AVE_flow2+flow2)/count
-            print pt,'AVE-\t%s\t%f\t%f' % ( "2",AVE_count2,AVE_flow2)
+            #print pt,'AVE-\t%s\t%f\t%f' % ( "2",AVE_count2,AVE_flow2)
 
             AVE_count3=(AVE_count3+count3)/count
             AVE_flow3=(AVE_flow3+flow3)/count
-            print pt,'AVE-\t%s\t%f\t%f' % ( "3",AVE_count3,AVE_flow3)
+            #print pt,'AVE-\t%s\t%f\t%f' % ( "3",AVE_count3,AVE_flow3)
 
             AVE_count4=(AVE_count4+count4)/count
             AVE_flow4=(AVE_flow4+flow4)/count
-            print pt,'AVE-\t%s\t%f\t%f' % ( "4",AVE_count4,AVE_flow4)
+            #print pt,'AVE-\t%s\t%f\t%f' % ( "4",AVE_count4,AVE_flow4)
 
             if (AVE_flow1+AVE_flow2+AVE_flow3+AVE_flow4 ==0): #took out ! for notequal to test
                 #open file to append
@@ -150,6 +150,11 @@ while True:
                 ##!!!!header row is dropped from subsequent days
                 filename = "{0}_{1}_{2}_conex-flow.csv".format(currentyear, currentmonth, currentday)
 
+            if (now.tm_sec == 0): ##does displayig the average in the cabin matter? if not can delete this if and 4 prints below
+                print pt,'AVE-\t%s\t%f\t%f' % ( "1",AVE_count1,AVE_flow1)
+                print pt,'AVE-\t%s\t%f\t%f' % ( "2",AVE_count2,AVE_flow2)
+                print pt,'AVE-\t%s\t%f\t%f' % ( "3",AVE_count3,AVE_flow3)
+                print pt,'AVE-\t%s\t%f\t%f' % ( "4",AVE_count4,AVE_flow4)
             #reset averageing counters
             AVE_count1=0
             AVE_flow1=0
