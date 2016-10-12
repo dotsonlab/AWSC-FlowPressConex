@@ -110,7 +110,7 @@ while True:
         flow2 = ((count2*12.0)/588.52)
         flow3 = ((count3*12.0)/2200.0/3.78)
         flow4 = ((count4*12.0)/2200.0/3.78)
-        if (count ==5)or(count ==10):
+        if (count ==5)or(count ==10)or(count==15):
             print pt,'\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "GW-R: ",flow1,"GW-P: ",flow3,"I-R: ",flow2,"I-P: ",flow4)
         count1=0
         count2=0
@@ -138,7 +138,7 @@ while True:
             AVE_flow4=(AVE_flow4+flow4)/count
             #print pt,'AVE-\t%s\t%f\t%f' % ( "4",AVE_count4,AVE_flow4)
 
-            if (AVE_flow1+AVE_flow2+AVE_flow3+AVE_flow4 ==0): #took out ! for notequal to test
+            if (AVE_flow1+AVE_flow2+AVE_flow3+AVE_flow4 !=0): #took out ! for notequal to test
                 #open file to append
                 file=open(filename,"a")
                 #add first column date/time stamp
