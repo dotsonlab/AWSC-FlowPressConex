@@ -104,13 +104,14 @@ while True:
         count2=0
         count3=0
         count4=0
-        time.sleep(.75)
+        time.sleep(.9)
         start_counter = 0
         flow1 = ((count1*12.0)/588.52) #assumes test flow was 11.5 gpm as defined by manufacturer and reports in gpm
         flow2 = ((count2*12.0)/588.52)
         flow3 = ((count3*12.0)/2200.0/3.78)
         flow4 = ((count4*12.0)/2200.0/3.78)
-        print pt,'\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "GW-R: ",flow1,"GW-P: ",flow3,"I-R: ",flow2,"I-P: ",flow4)
+        if (count ==5):
+            print pt,'\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "GW-R: ",flow1,"GW-P: ",flow3,"I-R: ",flow2,"I-P: ",flow4)
         count1=0
         count2=0
         count3=0
