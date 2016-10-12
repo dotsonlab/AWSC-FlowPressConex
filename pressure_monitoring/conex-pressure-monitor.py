@@ -153,7 +153,7 @@ while True:
                 print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "5",AVE_reading5,AVE_volts5,AVE_pressure5)
 
 
-                if (AVE_pressure1<1)or(AVE_pressure2<1)or(AVE_pressure3<1)or(AVE_pressure4<1)or(AVE_pressure5<1):
+                if (AVE_pressure1>1)or(AVE_pressure2>1)or(AVE_pressure3>1)or(AVE_pressure4>1)or(AVE_pressure5>1):
 		    # open file to append
                     file=open(filename,"a")
                     # add first column date/time stamp
