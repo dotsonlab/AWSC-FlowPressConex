@@ -119,7 +119,7 @@ while True:
         lastflow3total = flow3total
         count = count+1
 
-        if (now.tm_sec >= 0)&(now.tm_sec <= 15)&(count>=10): #if new minute, write data to file
+        if (now.tm_sec == 0)or(now.tm_sec == 15)or(now.tm_sec == 30)or(now.tm_sec == 45): #if 15sec interval, write data to file
                                          # and write only one value for second $
             AVE_count1=(AVE_count1+count1)/count
             AVE_flow1=(AVE_flow1+flow1)/count
@@ -137,7 +137,7 @@ while True:
             AVE_flow4=(AVE_flow4+flow4)/count
             print pt,'AVE-\t%s\t%f\t%f' % ( "4",AVE_count4,AVE_flow4)
 
-            if (AVE_flow1+AVE_flow2+AVE_flow3+AVE_flow4 !=0):
+            if (AVE_flow1+AVE_flow2+AVE_flow3+AVE_flow4 =0): #took out ! for notequal to test
                 #open file to append
                 file=open(filename,"a")
                 #add first column date/time stamp
