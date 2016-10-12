@@ -137,7 +137,7 @@ while True:
             AVE_flow4=(AVE_flow4+flow4)/count
             print pt,'AVE-\t%s\t%f\t%f' % ( "4",AVE_count4,AVE_flow4)
 
-            if (AVE_flow1+AVE_flow2+AVE_flow3+AVE_flow4 =0): #took out ! for notequal to test
+            if (AVE_flow1+AVE_flow2+AVE_flow3+AVE_flow4 ==0): #took out ! for notequal to test
                 #open file to append
                 file=open(filename,"a")
                 #add first column date/time stamp
