@@ -125,7 +125,7 @@ while True:
         #print pt,'\t%s\t%f\t%f\t%f\t%i' % ( "4",reading4,volts4,pressure4,count)
         #print pt,'\t%s\t%f\t%f\t%f\t%i' % ( "5",reading5,volts5,pressure5,count)
 
-        if (now.tm_sec == 0)&(count>10): #if new minute, write data to file
+        if (now.tm_sec == 0)or(now.tm_sec == 15)or(now.tm_sec == 30)or(now.tm_sec == 45): #if new minute, write data to file
                                          # avd write only one value for second $
                 AVE_reading1=(AVE_reading1+reading1)/count
                 AVE_volts1=(AVE_volts1+volts1)/count
