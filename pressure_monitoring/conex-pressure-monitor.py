@@ -125,34 +125,39 @@ while True:
         #print pt,'\t%s\t%f\t%f\t%f\t%i' % ( "4",reading4,volts4,pressure4,count)
         #print pt,'\t%s\t%f\t%f\t%f\t%i' % ( "5",reading5,volts5,pressure5,count)
 
-        if (now.tm_sec == 0)or(now.tm_sec == 15)or(now.tm_sec == 30)or(now.tm_sec == 45): #if new minute, write data to file
+        if (now.tm_sec == 0)or(now.tm_sec == 15)or(now.tm_sec == 30)or(now.tm_sec == 45)and(count>5): #if new minute, write data to file
                                          # avd write only one value for second $
                 AVE_reading1=(AVE_reading1+reading1)/count
                 AVE_volts1=(AVE_volts1+volts1)/count
                 AVE_pressure1=(AVE_pressure1+pressure1)/count
-                print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "1",AVE_reading1,AVE_volts1,AVE_pressure1)
+                #print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "1",AVE_reading1,AVE_volts1,AVE_pressure1)
 
                 AVE_reading2=(AVE_reading2+reading2)/count
                 AVE_volts2=(AVE_volts2+volts2)/count
                 AVE_pressure2=(AVE_pressure2+pressure2)/count
-                print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "2",AVE_reading2,AVE_volts2,AVE_pressure2)
+                #print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "2",AVE_reading2,AVE_volts2,AVE_pressure2)
 
                 AVE_reading3=(AVE_reading3+reading3)/count
                 AVE_volts3=(AVE_volts3+volts3)/count
                 AVE_pressure3=(AVE_pressure3+pressure3)/count
-                print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "3",AVE_reading3,AVE_volts3,AVE_pressure3)
+                #print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "3",AVE_reading3,AVE_volts3,AVE_pressure3)
 
                 AVE_reading4=(AVE_reading4+reading4)/count
                 AVE_volts4=(AVE_volts4+volts4)/count
                 AVE_pressure4=(AVE_pressure4+pressure4)/count
-                print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "4",AVE_reading4,AVE_volts4,AVE_pressure4)
+                #print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "4",AVE_reading4,AVE_volts4,AVE_pressure4)
 
                 AVE_reading5=(AVE_reading5+reading5)/count
                 AVE_volts5=(AVE_volts5+volts5)/count
                 AVE_pressure5=(AVE_pressure5+pressure5)/count
-                print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "5",AVE_reading5,AVE_volts5,AVE_pressure5)
-
-
+                #print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "5",AVE_reading5,AVE_volts5,AVE_pressure5)
+		if (now.tm_sec ==0):
+		    print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "1",AVE_reading1,AVE_volts1,AVE_pressure1)
+	            print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "2",AVE_reading2,AVE_volts2,AVE_pressure2)
+		    print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "3",AVE_reading3,AVE_volts3,AVE_pressure3)
+                    print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "5",AVE_reading5,AVE_volts5,AVE_pressure5)
+                    print pt,'AVE-\t%s\t%f\t%f\t%f' % ( "4",AVE_reading4,AVE_volts4,AVE_pressure4)
+ 
                 if (AVE_pressure1>1)or(AVE_pressure2>1)or(AVE_pressure3>1)or(AVE_pressure4>1)or(AVE_pressure5>1):
 		    # open file to append
                     file=open(filename,"a")
