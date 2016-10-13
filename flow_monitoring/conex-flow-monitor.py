@@ -106,10 +106,10 @@ while True:
         count4=0
         time.sleep(1)
         start_counter = 0
-        flow1 = ((count1*12.0*5.0)/588.52) #assumes test flow was 11.5 gpm as defined by manufacturer and reports in gpm
-        flow2 = ((count2*12.0*5.0)/588.52)   #changed factor for 5s frequency to 1 sec
-        flow3 = ((count3*12.0*5.0)/2200.0/3.78)
-        flow4 = ((count4*12.0*5.0)/2200.0/3.78)
+        flow1 = ((count1*12.0)*5.0/588.52) #assumes test flow was 11.5 gpm as defined by manufacturer and reports in gpm
+        flow2 = ((count2*12.0)*5.0/588.52)   #changed factor for 5s frequency to 1 sec
+        flow3 = ((count3*12.0)*5.0/2200.0/3.78)
+        flow4 = ((count4*12.0)*5.0/2200.0/3.78)
         if (count ==5)or(count ==10)or(count==15):
             print pt,'\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "GW-R: ",flow1,"GW-P: ",flow3,"I-R: ",flow2,"I-P: ",flow4)
         count1=0
