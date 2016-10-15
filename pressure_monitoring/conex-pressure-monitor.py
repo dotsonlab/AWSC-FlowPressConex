@@ -94,7 +94,7 @@ while True:
             file.write("Time,Feed,GWReject,INTReject,WWProduct,INTProduct\n")
             #add first column date/time stamp
             file.write(pt)
-            file.write(",%f,%f,%f,%f,%f\n" % (AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
+            #file.write(",%f,%f,%f,%f,%f\n" % (AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
             file.close()
 
         #scale reading back to voltage
