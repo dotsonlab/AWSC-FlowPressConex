@@ -91,7 +91,7 @@ while True:
             #informative messaging for starting storage file
             print "Opening ",filename, " for appending..."
             print "reading analog inputs and storing data..."
-            file.write("Time,Feed,GWReject,INTReject,WWProduct,INTProduct\n")
+            file.write("Time,Feed,GWReject,INTReject,Prefilter2,Prefilter1\n")
             #add first column date/time stamp
             #file.write(pt)
             #file.write(",%f,%f,%f,%f,%f\n" % (AVE_pressure1,AVE_pressure2,AVE_pressure3,AVE_pressure4,AVE_pressure5))
@@ -114,7 +114,7 @@ while True:
         pressure5 = volts5 * 140.45 - 49.16 + 1.16 #inter product
         
 	if (printcount>5):
-            print pt,'\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "F: ",pressure1,"GW-R: ",pressure2,"I-P: ",pressure5,"I-R: ",pressure3,"W-P",pressure4)
+            print pt,'\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "F: ",pressure1,"GW-R: ",pressure2,"I-R: ",pressure3,"PF-1: ",pressure5,"PF-2",pressure4)
             printcount=0
         
 	#write to the screen #
